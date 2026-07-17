@@ -28,15 +28,6 @@ Library for [Moonloader](https://www.blast.hk/threads/13305/), allows to use mul
 1. Download archive from [last release](https://github.com/MrCreepTon/mirror/releases/latest).
 2. Unpack `mirror_core.dll` and `mirror.lua` in `<GTA SA Folder>/moonloader/lib/`.
 
-## Archive differences
-
-Release contains 2 archives:
-
-| Archive | Description |
-|---|---|
-| `mirror-*.zip` | Default build. The world is only streamed around the player, so cameras placed far away may see unloaded models. Use this one if possible. |
-| `mirror-streaming-*.zip` | Additionally streams the world around each camera during rendering. Use it when cameras look at places far away from the player. Costs more performance. |
-
 ## Quick start
 
 ```lua
@@ -134,7 +125,7 @@ cmake --preset win32
 cmake --build --preset release
 ```
 
-The built DLL is `build/bin/mirror_core.dll`. The streaming variant is built with the `win32-streaming` / `release-streaming` presets.
+The built DLL is `build/bin/mirror_core.dll`.
 
 To automatically copy the DLL and `mirror.lua` into the game after every build, create `CMakeUserPresets.json`:
 
@@ -167,4 +158,4 @@ lib/       — lua51.lib (LuaJIT import library)
 
 ## Releases
 
-Every push is built by CI (Actions tab, artifacts `mirror` and `mirror-streaming`). A release is created by pushing a `v*` tag — CI builds both variants and publishes a draft release with two archives.
+Every push is built by CI (Actions tab, artifact `mirror`). A release is created by pushing a `v*` tag — CI builds the module and publishes a draft release with the archive.

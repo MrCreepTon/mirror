@@ -9,7 +9,6 @@ if(NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(FATAL_ERROR "mirror_core must be built as 32-bit. Configure with: cmake --preset win32")
 endif()
 
-option(MIRROR_WITH_STREAMING "Run CStreaming::Update during off-screen camera rendering" OFF)
 set(MIRROR_DEPLOY_DIR "" CACHE PATH "Optional: copy the built DLL here after each build (e.g. <game>/moonloader/lib)")
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
@@ -37,7 +36,6 @@ target_compile_definitions(mirror_core PRIVATE
     SOL_ALL_SAFETIES_ON=1
     SOL_LUAJIT=1
     _CRT_SECURE_NO_WARNINGS
-    $<$<BOOL:${MIRROR_WITH_STREAMING}>:MIRROR_WITH_STREAMING>
 )
 
 target_include_directories(mirror_core PRIVATE

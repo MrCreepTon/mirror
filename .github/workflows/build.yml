@@ -13,36 +13,25 @@ permissions:
 jobs:
   build:
     runs-on: windows-2022
-    strategy:
-      matrix:
-        include:
-          - name: mirror
-            configure_preset: win32
-            build_preset: release
-            build_dir: build
-          - name: mirror-streaming
-            configure_preset: win32-streaming
-            build_preset: release-streaming
-            build_dir: build-streaming
     steps:
       - uses: actions/checkout@v4
 
       - name: Configure
-        run: cmake --preset ${{ matrix.configure_preset }}
+        run: cmake --preset win32
 
       - name: Build
-        run: cmake --build --preset ${{ matrix.build_preset }}
+        run: cmake --build --preset release
 
       - name: Package
         run: |
           New-Item -ItemType Directory -Force dist/ | Out-Null
-          Copy-Item ${{ matrix.build_dir }}/bin/mirror_core.dll dist/
+          Copy-Item build/bin/mirror_core.dll dist/
           Copy-Item lua/mirror.lua dist/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.name }}
+          name: mirror
           path: dist
           if-no-files-found: error
 
@@ -58,11 +47,8 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
 
-      - name: Zip variants
-        run: |
-          for variant in mirror mirror-streaming; do
-            (cd "$variant" && zip -r "../$variant-${{ github.ref_name }}.zip" .)
-          done
+      - name: Zip artifact
+        run: (cd mirror && zip -r "../mirror-${{ github.ref_name }}.zip" .)
 
       - name: Create draft release
         env:

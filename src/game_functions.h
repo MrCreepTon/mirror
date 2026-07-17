@@ -20,9 +20,6 @@
 #define RENDER_EFFECTS_ADDR 0x53E170
 #define DEFINED_STATE_ADDR 0x734650
 #define RENDER_SKY_POLYS_ADDR 0x714650
-#ifdef MIRROR_WITH_STREAMING
-    #define CSTREAMING_UPDATE_ADDR 0x40E670
-#endif
 
 typedef void* (__cdecl *RwRasterCreate_t)(int width, int height, int depth, int flags);
 typedef signed int (__cdecl *RwRasterDestroy_t)(void* raster);
@@ -42,9 +39,6 @@ typedef void* (__cdecl* RenderWeaponPedsForPC_t)();
 typedef void (__cdecl* RenderEffects_t)();
 typedef void (__cdecl* DefinedState_t)();
 typedef void (__cdecl* RenderSkyPolys_t)();
-#ifdef MIRROR_WITH_STREAMING
-    typedef void (__cdecl* CStreaming__Update_t)();
-#endif
 
 void* __cdecl RwRasterCreate(int width, int height, int depth, int flags);
 signed int __cdecl RwRasterDestroy(void* raster);
@@ -64,6 +58,3 @@ void* __cdecl RenderWeaponPedsForPC();
 void __cdecl RenderEffects();
 void __cdecl DefinedState();
 void __cdecl RenderSkyPolys();
-#ifdef MIRROR_WITH_STREAMING
-    void __cdecl CStreaming__Update();
-#endif

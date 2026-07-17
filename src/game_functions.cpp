@@ -89,10 +89,3 @@ void __cdecl RenderSkyPolys() {
     RenderSkyPolys_t func = (RenderSkyPolys_t)RENDER_SKY_POLYS_ADDR;
     func();
 }
-
-#ifdef MIRROR_WITH_STREAMING
-    void __cdecl CStreaming__Update() {
-        CStreaming__Update_t func = (CStreaming__Update_t)CSTREAMING_UPDATE_ADDR;
-        func();
-    }
-#endif

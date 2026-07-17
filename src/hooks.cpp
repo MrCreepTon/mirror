@@ -35,10 +35,6 @@ void RenderCamera(Camera* pCamera) {
     camera->m_mCameraMatrix.pos.x = pCamera->posX;
     camera->m_mCameraMatrix.pos.y = pCamera->posY;
     camera->m_mCameraMatrix.pos.z = pCamera->posZ;
-    
-    #ifdef MIRROR_WITH_STREAMING
-        CStreaming__Update();
-    #endif
 
     CCamera__CalculateDerivedValues(camera, 0, 1);
     CCamera__CopyCameraMatrixToRwCam(camera, 1);
@@ -75,9 +71,6 @@ void RenderCamera(Camera* pCamera) {
     *nightVisionMode = oldNightVisionMode;
 
     cameraRender = false;
-    #ifdef MIRROR_WITH_STREAMING
-        CStreaming__Update();
-    #endif
 
     CCamera__CalculateDerivedValues(camera, 0, 1);
     CCamera__CopyCameraMatrixToRwCam(camera, 1);
