@@ -1,0 +1,38 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "win32",
+      "displayName": "Win32 (Visual Studio 2022)",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "Win32",
+      "binaryDir": "${sourceDir}/build"
+    },
+    {
+      "name": "win32-streaming",
+      "displayName": "Win32 streaming (Visual Studio 2022)",
+      "inherits": "win32",
+      "binaryDir": "${sourceDir}/build-streaming",
+      "cacheVariables": {
+        "MIRROR_WITH_STREAMING": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "configurePreset": "win32",
+      "configuration": "Release"
+    },
+    {
+      "name": "debug",
+      "configurePreset": "win32",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release-streaming",
+      "configurePreset": "win32-streaming",
+      "configuration": "Release"
+    }
+  ]
+}
