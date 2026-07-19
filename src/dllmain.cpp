@@ -132,6 +132,7 @@ sol::table open(sol::state_view lua) {
         "rotY", &Camera::rotY,
         "rotZ", &Camera::rotZ,
         "fov", &Camera::fov,
+        "frameBuffer", &Camera::frameBuffer,
         "delete", &DeleteCamera
     );
 

@@ -67,6 +67,8 @@ Complete scripts are in the [examples](examples/) folder:
 |---|---|---|
 | [back](examples/back/) | `/back` | Rear-view mirror in a corner of the screen |
 | [drone](examples/drone/) | `/drone` | Flying FPV drone with a live camera feed |
+| [dx9_mimgui_integration](examples/dx9_mimgui_integration/) | `/mi_menu` | Shows a camera feed inside a mimgui (ImGui) window |
+| [object_screen](examples/object_screen/) | `/os <command>` | Binds a camera feed onto a object's material |
 | [spy](examples/spy/) | `/spy <id>` | Surveillance camera that follows another player's point of view |
 | [tv](examples/tv/) | `/tv` | 3D screen in the world showing a live feed of yourself |
 
@@ -94,6 +96,7 @@ A camera rendering the world into its own texture.
 | `posX`, `posY`, `posZ` | Position in the world |
 | `rotX`, `rotY`, `rotZ` | Rotation in degrees |
 | `fov` | Field of view in degrees |
+| `frameBuffer` | Raw pointer to the camera's `RwRaster` texture, for low-level interop (e.g. binding onto an object's material or resolving the underlying D3D texture) — see the [object_screen](examples/object_screen/) and [dx9_mimgui_integration](examples/dx9_mimgui_integration/) examples |
 | `:delete()` | Destroys the camera and frees its textures |
 
 #### Screen2D
