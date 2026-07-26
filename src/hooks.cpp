@@ -13,7 +13,7 @@ DrawBlur_t originalRenderBlur = nullptr;
 
 bool cameraRender = false;
 
-void RenderCamera(Camera* pCamera) {
+void RenderCamera(const std::shared_ptr<Camera>& pCamera, const std::string& scriptName) {
     cameraRender = true;
     CScene* scene = GetGlobalScene();
     void* oldFrameBuffer = scene->m_pRwCamera->frameBuffer;
@@ -28,6 +28,8 @@ void RenderCamera(Camera* pCamera) {
     CCamera* camera = GetGlobalCamera();
     CMatrix oldMatrix = camera->m_mCameraMatrix;
     float oldFov = camera->m_fFOV;
+
+    CallCameraHandler(pCamera, scriptName);
 
     camera->m_fFOV = pCamera->fov;
 
@@ -82,7 +84,7 @@ void RenderCamera(Camera* pCamera) {
 void __cdecl HookedCMirrors_BeforeMainRender() {
     for (const auto& pair : scriptCameras) {
         for (const auto& cam : pair.second) {
-            RenderCamera(cam.get());
+            RenderCamera(cam, pair.first);
         }
     }
     originalCMirrors_BeforeMainRender();

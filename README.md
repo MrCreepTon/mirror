@@ -66,6 +66,7 @@ Complete scripts are in the [examples](examples/) folder:
 | Example | Command | Description |
 |---|---|---|
 | [back](examples/back/) | `/back` | Rear-view mirror in a corner of the screen |
+| [cameraOnRender vs while true](examples/cameraOnRender%20vs%20while%20true/) | `/diff` | Side-by-side comparison of updating a camera from `onCameraRender` vs from the main loop |
 | [drone](examples/drone/) | `/drone` | Flying FPV drone with a live camera feed |
 | [dx9_mimgui_integration](examples/dx9_mimgui_integration/) | `/mi_menu` | Shows a camera feed inside a mimgui (ImGui) window |
 | [object_screen](examples/object_screen/) | `/os <command>` | Binds a camera feed onto a object's material |
@@ -73,6 +74,12 @@ Complete scripts are in the [examples](examples/) folder:
 | [tv](examples/tv/) | `/tv` | 3D screen in the world showing a live feed of yourself |
 
 ## API
+
+### Fields
+
+| Field | Description |
+|---|---|
+| `mirror.version` | Get version of library |
 
 ### Functions
 
@@ -82,6 +89,12 @@ Complete scripts are in the [examples](examples/) folder:
 | `mirror.createScreen2D(left, top, right, bottom[, camera])` | `Screen2D` | Creates a rectangle on the screen (coordinates in pixels) that displays the camera image. |
 | `mirror.createScreen3D(lbX, lbY, lbZ, rbX, rbY, rbZ, ltX, ltY, ltZ, rtX, rtY, rtZ[, camera])` | `Screen3D` | Creates a quad in the game world defined by four corners (left-bottom, right-bottom, left-top, right-top; world coordinates). Not rendered until a camera is attached. |
 | `mirror.unload()` | — | Destroys all cameras and screens created by the current script. Called automatically when the script terminates, no need to call it manually. |
+
+### Callbacks
+
+| Callback | Description |
+|---|---|
+| `onCameraRender(camera)` | Called once per frame for each of your cameras, right before it renders. Any changes made to `camera` inside the callback take effect in the same frame. It's useful for tracking a fast-moving object (see [example](examples/cameraOnRender%20vs%20while%20true/) for details). |
 
 ### Objects
 

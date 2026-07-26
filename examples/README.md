@@ -5,6 +5,7 @@ Example scripts showing what can be built with **mirror**.
 | Example | Command | Description |
 |---|---|---|
 | [back](back/) | `/back` | Rear-view mirror: shows what is behind the game camera in a corner of the screen |
+| [cameraOnRender vs while true](cameraOnRender%20vs%20while%20true/) | `/diff` | Side-by-side comparison of updating a camera from `onCameraRender` vs from the main loop |
 | [drone](drone/) | `/drone` | Flying drone with a live camera feed, controlled with the numpad |
 | [dx9_mimgui_integration](dx9_mimgui_integration/) | `/mi_menu` | Shows a camera feed inside a mimgui (ImGui) window |
 | [object_screen](object_screen/) | `/os <command>` | Binds a camera feed onto a object's material |

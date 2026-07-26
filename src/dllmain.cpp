@@ -1,6 +1,7 @@
 #include "main.h"
 #include "game_structures.h"
 
+std::unordered_map<std::string, lua_State*> scriptStates;
 std::unordered_map<std::string, std::unordered_set<std::shared_ptr<Camera>>> scriptCameras;
 std::unordered_map<std::string, std::unordered_set<std::shared_ptr<Screen2D>>> scriptScreens2D;
 std::unordered_map<std::string, std::unordered_set<std::shared_ptr<Screen3D>>> scriptScreens3D;
@@ -22,6 +23,7 @@ void UnloadScript(sol::this_state ts) {
     scriptCameras.erase(scriptName);
     scriptScreens2D.erase(scriptName);
     scriptScreens3D.erase(scriptName);
+    scriptStates.erase(scriptName);
 }
 
 std::shared_ptr<Camera> CreateCamera(sol::this_state ts, int width, int height, int depth, sol::optional<float> posXOpt, sol::optional<float> posYOpt, sol::optional<float> posZOpt, sol::optional<float> rotXOpt, sol::optional<float> rotYOpt, sol::optional<float> rotZOpt, sol::optional<float> fovOpt) {
@@ -107,8 +109,24 @@ void DeleteScreen3D(sol::this_state ts, std::shared_ptr<Screen3D> screen3D) {
     }
 }
 
+void CallCameraHandler(const std::shared_ptr<Camera>& pCamera, const std::string& scriptName) {
+    if (!pCamera) return;
+    auto stateIt = scriptStates.find(scriptName);
+    if (stateIt == scriptStates.end()) return;
+    sol::state_view lua(stateIt->second);
+    sol::protected_function handler = lua["onCameraRender"];
+    if (!handler.valid()) return;
+    handler(pCamera);
+}
+
 sol::table open(sol::state_view lua) {
+    sol::register_main_thread(lua.lua_state());
     sol::table module = lua.create_table();
+
+    std::string scriptName = GetCurrentScriptName(sol::this_state(lua.lua_state()));
+    scriptStates[scriptName] = lua.lua_state();
+
+    module.set("version", "1.0.2");
 
     module.set_function("createCamera", &CreateCamera);
     module.set_function("createScreen2D", &CreateScreen2D);

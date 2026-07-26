@@ -27,3 +27,5 @@ extern "C" {
 extern std::unordered_map<std::string, std::unordered_set<std::shared_ptr<Camera>>> scriptCameras;
 extern std::unordered_map<std::string, std::unordered_set<std::shared_ptr<Screen2D>>> scriptScreens2D;
 extern std::unordered_map<std::string, std::unordered_set<std::shared_ptr<Screen3D>>> scriptScreens3D;
+
+void CallCameraHandler(const std::shared_ptr<Camera>& pCamera, const std::string& scriptName);
