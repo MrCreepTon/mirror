@@ -34,8 +34,8 @@ Library for [Moonloader](https://www.blast.hk/threads/13305/), allows to use mul
 local mirror = require('mirror')
 
 function main()
-    -- Camera 640x480: in world position, rotation in degrees, FOV 70
-    local cam = mirror.createCamera(640, 480, 32, 2495.0, -1668.0, 15.0, 0.0, 0.0, 180.0, 70.0)
+    -- Camera 640x480: in world position, rotation in degrees, FOV 50
+    local cam = mirror.createCamera(640, 480, 32, 2495.0, -1668.0, 15.0, 0.0, 0.0, 180.0, 50.0)
 
     -- Output image to rectangle in top left corner of the screen
     local screen = mirror.createScreen2D(20.0, 20.0, 340.0, 260.0, cam)
