@@ -41,7 +41,7 @@ function createTv()
 
     -- camera hangs at the screen center and looks back at the player
     local x, y = getScreenResolution()
-    camera = mirror.createCamera(x - 1, y - 1, 32, cx, cy, pz + 0.5, 90, 0, heading)
+    camera = mirror.createCamera(x - 1, y - 1, 32, cx, cy, pz + 0.5, 0, 0, heading - 180)
 
     screen = mirror.createScreen3D(
         cx - rightX * hw, cy - rightY * hw, pz, -- left bottom

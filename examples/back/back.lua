@@ -27,11 +27,11 @@ function processBack()
     end
     local cx, cy, cz = getActiveCameraCoordinates()
     local px, py, pz = getActiveCameraPointAt()
-    local angleZ = math.atan2(cy - py, cx - px) * 180.0 / math.pi + 90
+    local angleZ = math.atan2(cy - py, cx - px) * 180.0 / math.pi - 90
     camera.posX = cx
     camera.posY = cy
     camera.posZ = cz
-    camera.rotX = 90
+    camera.rotX = 0
     camera.rotY = 0
     camera.rotZ = angleZ
 end
@@ -47,7 +47,7 @@ end
 
 function createBackCamera()
     removeBackCamera()
-    camera = mirror.createCamera(1910, 1080, 32, 0, 0, 0, 90, 0, 0)
+    camera = mirror.createCamera(1910, 1080, 32, 0, 0, 0, 0, 0, 0)
     screen = mirror.createScreen2D(SCREEN_POS.X, SCREEN_POS.Y, SCREEN_POS.X + SCREEN_POS.WIDTH, SCREEN_POS.Y + SCREEN_POS.HEIGHT, camera)
 end
 

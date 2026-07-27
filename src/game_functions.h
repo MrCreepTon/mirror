@@ -7,6 +7,7 @@
 #define RWCAMERA_CLEAR_ADDR 0x7EE340
 #define RWCAMERA_BEGIN_UPDATE_ADDR 0x619450
 #define RWCAMERA_END_UPDATE_ADDR 0x7EE180
+#define RWCAMERA_SET_VIEW_WINDOW_ADDR 0x7EE410
 #define RENDER_SCENE_ADDR 0x53DF40
 #define CCAMERA_COPY_CAMERA_MATRIX_TO_RWCAM 0x50AFA0
 #define CSPRITE2D_SET_VERTICES_ADDR 0x727420
@@ -26,6 +27,7 @@ typedef signed int (__cdecl *RwRasterDestroy_t)(void* raster);
 typedef RwCamera* (__cdecl *RwCameraClear_t)(RwCamera* camera, RwRGBA* color, int clearMode);
 typedef RwCamera* (__cdecl *RwCameraBeginUpdate_t)(RwCamera* camera);
 typedef RwCamera* (__cdecl *RwCameraEndUpdate_t)(RwCamera* camera);
+typedef RwCamera* (__cdecl *RwCameraSetViewWindow_t)(RwCamera* camera, RwV2d* viewWindow);
 typedef void (__cdecl *RenderScene_t)();
 typedef char (__thiscall *CCamera__CopyCameraMatrixToRwCam_t)(CCamera* camera, char dontStoreOldMatrix);
 typedef int (__cdecl *CSprite2D__SetVertices_t)(CRect* rect, RwRGBA* color1, RwRGBA* color2, RwRGBA* color3, RwRGBA* color4);
@@ -45,6 +47,7 @@ signed int __cdecl RwRasterDestroy(void* raster);
 RwCamera* __cdecl RwCameraClear(RwCamera* camera, RwRGBA* color, int clearMode);
 RwCamera* __cdecl RwCameraBeginUpdate(RwCamera* camera);
 RwCamera* __cdecl RwCameraEndUpdate(RwCamera* camera);
+RwCamera* __cdecl RwCameraSetViewWindow(RwCamera* camera, RwV2d* viewWindow);
 void __cdecl RenderScene();
 char __fastcall CCamera__CopyCameraMatrixToRwCam(CCamera* camera, char dontStoreOldMatrix);
 int __cdecl CSprite2D__SetVertices(CRect* rect, RwRGBA* color1, RwRGBA* color2, RwRGBA* color3, RwRGBA* color4);

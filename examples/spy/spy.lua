@@ -74,9 +74,9 @@ function processCamera()
     camera.posZ = hz
 
     local angle = getHeadingFromVector2d(camPos.current.x, camPos.current.y)
-    camera.rotX = 90
+    camera.rotX = 0
     camera.rotY = 0
-    camera.rotZ = angle + 180
+    camera.rotZ = angle
 end
 
 function onSpyCommand(arg)
@@ -137,7 +137,7 @@ function createAll()
     camera = mirror.createCamera(sx - 10, sy, 32)
     local x = sx / 100 * SCREEN_POS.x.value
     local y = sy / 100 * SCREEN_POS.y.value
-    screen = mirror.createScreen2D(x, y, x + SCREEN_POS.w.value, y + SCREEN_POS.h.value, camera, 90, 0, 0)
+    screen = mirror.createScreen2D(x, y, x + SCREEN_POS.w.value, y + SCREEN_POS.h.value, camera)
 end
 
 function destroyAll()

@@ -25,6 +25,11 @@ RwCamera* __cdecl RwCameraEndUpdate(RwCamera* camera) {
     return func(camera);
 }
 
+RwCamera* __cdecl RwCameraSetViewWindow(RwCamera* camera, RwV2d* viewWindow) {
+    RwCameraSetViewWindow_t func = (RwCameraSetViewWindow_t)RWCAMERA_SET_VIEW_WINDOW_ADDR;
+    return func(camera, viewWindow);
+}
+
 void __cdecl RenderScene() {
     RenderScene_t func = (RenderScene_t)RENDER_SCENE_ADDR;
     func();

@@ -32,7 +32,7 @@ std::shared_ptr<Camera> CreateCamera(sol::this_state ts, int width, int height, 
         width, height, depth,
         posXOpt.value_or(0.0f), posYOpt.value_or(0.0f), posZOpt.value_or(0.0f),
         rotXOpt.value_or(0.0f), rotYOpt.value_or(0.0f), rotZOpt.value_or(0.0f),
-        fovOpt.value_or(90.0f)
+        fovOpt.value_or(50.0f)
     );
     scriptCameras[scriptName].insert(newCamera);
     return newCamera;
@@ -126,7 +126,7 @@ sol::table open(sol::state_view lua) {
     std::string scriptName = GetCurrentScriptName(sol::this_state(lua.lua_state()));
     scriptStates[scriptName] = lua.lua_state();
 
-    module.set("version", "1.0.2");
+    module.set("version", "1.0.3");
 
     module.set_function("createCamera", &CreateCamera);
     module.set_function("createScreen2D", &CreateScreen2D);

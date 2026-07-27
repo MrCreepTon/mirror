@@ -73,9 +73,9 @@ function getCameraPositionAndRotation()
             z = z
         },
         rotation = {
-            x = 90 + 20,
+            x = 20,
             y = 0,
-            z = heading + 180
+            z = heading
         }
     }
 end
@@ -93,7 +93,7 @@ end
 function onActivate()
     local xw, yw = getScreenResolution()
     for i, _ in pairs(cameras) do
-        cameras[i] = mirror.createCamera(xw - 10, yw - 10, 32, 0, 0, 0, 90, 0, 0)
+        cameras[i] = mirror.createCamera(xw - 10, yw - 10, 32, 0, 0, 0, 0, 0, 0)
     end
     yw = yw - INFO_BAR_HEIGHT
     screens['cameraOnRender'] = mirror.createScreen2D(0, 0, xw / 2, yw, cameras['cameraOnRender'])

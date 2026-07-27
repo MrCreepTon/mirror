@@ -90,7 +90,7 @@ function Drone.new(posX, posY, posZ, angle)
     setmetatable(instance, {__index=Drone})
     instance:_createCar()
 
-    instance.camera = mirror.createCamera(1910, 1080, 32, instance.position.x, instance.position.y, instance.position.z, 90, 0, instance.angle)
+    instance.camera = mirror.createCamera(1910, 1080, 32, instance.position.x, instance.position.y, instance.position.z, 0, 0, instance.angle)
     instance.screen = mirror.createScreen2D(1200, 500, 1700, 1000, instance.camera)
 
     return instance
@@ -119,7 +119,7 @@ function Drone:update()
     self.camera.posX = self.position.x + math.sin(-math.rad(self.angle)) * self.cameraOffset.x
     self.camera.posY = self.position.y + math.cos(-math.rad(self.angle)) * self.cameraOffset.y
     self.camera.posZ = self.position.z + self.cameraOffset.z
-    self.camera.rotZ = self.angle - 180
+    self.camera.rotZ = self.angle
 
     self:processKeys()
 end

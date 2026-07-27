@@ -85,7 +85,7 @@ Complete scripts are in the [examples](examples/) folder:
 
 | Function | Returns | Description |
 |---|---|---|
-| `mirror.createCamera(width, height, depth[, posX, posY, posZ, rotX, rotY, rotZ, fov])` | `Camera` | Creates a camera rendering the world into a `width`×`height` texture (`depth` is the bit depth, use `32`). Position defaults to `0, 0, 0`, rotation to `0`, `fov` to `90`. |
+| `mirror.createCamera(width, height, depth[, posX, posY, posZ, rotX, rotY, rotZ, fov])` | `Camera` | Creates a camera rendering the world into a `width`×`height` texture (`depth` is the bit depth, use `32`). Position defaults to `0, 0, 0`, rotation to `0`, `fov` to `50`. |
 | `mirror.createScreen2D(left, top, right, bottom[, camera])` | `Screen2D` | Creates a rectangle on the screen (coordinates in pixels) that displays the camera image. |
 | `mirror.createScreen3D(lbX, lbY, lbZ, rbX, rbY, rbZ, ltX, ltY, ltZ, rtX, rtY, rtZ[, camera])` | `Screen3D` | Creates a quad in the game world defined by four corners (left-bottom, right-bottom, left-top, right-top; world coordinates). Not rendered until a camera is attached. |
 | `mirror.unload()` | — | Destroys all cameras and screens created by the current script. Called automatically when the script terminates, no need to call it manually. |

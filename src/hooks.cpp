@@ -1,7 +1,12 @@
 #include "hooks.h"
 #include <MinHook.h>
+#include <cmath>
 #include "main.h"
 #include "rwconst.h"
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 #define COLOR_TOP_ADDR 0xB72CA0
 #define INFARED_MODE_ADDR 0xC402B9
@@ -22,16 +27,21 @@ void RenderCamera(const std::shared_ptr<Camera>& pCamera, const std::string& scr
     scene->m_pRwCamera->frameBuffer = pCamera->frameBuffer;
     scene->m_pRwCamera->zBuffer = pCamera->zBuffer;
 
+    RwV2d oldViewWindow = { scene->m_pRwCamera->viewWindow[0], scene->m_pRwCamera->viewWindow[1] };
+
     RwRGBA color = *(RwRGBA*)COLOR_TOP_ADDR;
     int clearMode = rwCAMERACLEARZ;
 
     CCamera* camera = GetGlobalCamera();
     CMatrix oldMatrix = camera->m_mCameraMatrix;
-    float oldFov = camera->m_fFOV;
 
     CallCameraHandler(pCamera, scriptName);
 
-    camera->m_fFOV = pCamera->fov;
+    float halfFovY = (pCamera->fov * (float)M_PI / 180.0f) * 0.5f;
+    RwV2d viewWindow;
+    viewWindow.y = std::tan(halfFovY);
+    viewWindow.x = viewWindow.y * ((float)pCamera->width / (float)pCamera->height);
+    RwCameraSetViewWindow(scene->m_pRwCamera, &viewWindow);
 
     SetMatrixRotation(&camera->m_mCameraMatrix, pCamera->rotX, pCamera->rotY, pCamera->rotZ);
     camera->m_mCameraMatrix.pos.x = pCamera->posX;
@@ -65,9 +75,8 @@ void RenderCamera(const std::shared_ptr<Camera>& pCamera, const std::string& scr
 
     scene->m_pRwCamera->frameBuffer = oldFrameBuffer;
     scene->m_pRwCamera->zBuffer = oldZBuffer;
+    RwCameraSetViewWindow(scene->m_pRwCamera, &oldViewWindow);
     *(&camera->m_mCameraMatrix) = oldMatrix;
-
-    camera->m_fFOV = oldFov;
 
     *infaredMode = oldInfraredMode;
     *nightVisionMode = oldNightVisionMode;

@@ -94,7 +94,7 @@ function onCameraCreateCommand()
     local xw, yw = getScreenResolution()
     local x, y, z = getCharCoordinates(PLAYER_PED)
     local heading = getCharHeading(PLAYER_PED)
-    local camera = mirror.createCamera(xw - 1, yw - 1, 32, x, y, z, 90, 0, heading+180)
+    local camera = mirror.createCamera(xw - 1, yw - 1, 32, x, y, z, 0, 0, heading)
     local index = getAvailableLowestIndex(cameras)
     cameras[index] = camera
     sampAddChatMessage(string.format('Camera created with index %d', index), -1)

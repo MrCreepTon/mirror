@@ -24,9 +24,9 @@ bool IsGameLoaded() {
 }
 
 void SetMatrixRotation(CMatrix* matrix, float rotX, float rotY, float rotZ) {
-    float radX = rotX * (float)M_PI / 180.0f;
+    float radX = (rotX + 90.0f) * (float)M_PI / 180.0f;
     float radY = rotY * (float)M_PI / 180.0f;
-    float radZ = rotZ * (float)M_PI / 180.0f;
+    float radZ = (rotZ + 180.0f) * (float)M_PI / 180.0f;
 
     float sX = std::sin(radX);
     float cX = std::cos(radX);

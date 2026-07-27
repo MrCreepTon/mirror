@@ -42,7 +42,7 @@ function onCameraCommand()
     end
     local xw, yw = getScreenResolution()
     local x, y, z = getCharCoordinates(PLAYER_PED)
-    camera = mirror.createCamera(xw - 1, yw - 1, 32, x, y, z, 90, 0, 0)
+    camera = mirror.createCamera(xw - 1, yw - 1, 32, x, y, z)
     sampAddChatMessage('Camera created', -1)
 end
 

@@ -28,6 +28,11 @@ struct RwRGBA {
     unsigned char alpha;
 };
 
+struct RwV2d {
+    float x;
+    float y;
+};
+
 struct CScene {
     void* m_pRwWorld;
     RwCamera* m_pRwCamera;
@@ -55,8 +60,6 @@ struct CMatrix {
 struct CCamera {
     char pad[2420];
     CMatrix m_mCameraMatrix;
-    char pad2[2492];
-    float m_fFOV;
 };
 
 typedef void (__cdecl* RenderStateSetFunc_t)(int, unsigned int);
